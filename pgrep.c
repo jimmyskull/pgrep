@@ -20,7 +20,6 @@ void *grep_job(void *arg) {
 	int size = params->size;
 
 	while (size-- && item != NULL) {
-		// printf("%s\n", item->path);
 		params->result[offset++] = grep(params->regex, item->path);
 		item = item->next;
 	}
