@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <regex.h>
 
-void grep(const char *pregex, const char *path)
+int grep(const char *pregex, const char *path)
 {
 	FILE *fp;
 	char *line = NULL;
@@ -15,7 +15,7 @@ void grep(const char *pregex, const char *path)
 	fp = fopen(path, "r");
 	if (fp == NULL) {
 		fprintf(stderr, "Cannot open %s\n", path);
-		return;
+		return 0;
 	}
 
 	rc = regcomp(&regex, pregex, 0);
@@ -29,11 +29,12 @@ void grep(const char *pregex, const char *path)
 		if (rc == 0)
 			matches++;
 	}
-	printf("%s: %d\n", path, matches);
 
 	fclose(fp);
 	if (line)
 		free(line);
 
 	regfree(&regex);
+
+	return matches;
 }

@@ -1,6 +1,7 @@
 CC = clang
 
-CFLAGS = -g -Wall -pedantic
+# CFLAGS = -g -Wall -pedantic
+CFLAGS = -O3 -march=native -Wall -pedantic
 
 SRCS = pgrep.c dir.c grep.c
 
@@ -8,7 +9,7 @@ OBJS = $(SRCS:.c=.o)
 
 MAIN = pgrep
 
-LIBS =
+LIBS = -lm -lpthread
 
 .PHONY: clean
 
